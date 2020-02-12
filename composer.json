@@ -1,0 +1,31 @@
+{
+    "name": "kamruljpi/role",
+    "authors": [
+        {
+            "name": "MD Kamruzzaman",
+            "email": "kamruljpi@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "kamruljpi\\Role\\": "src/"
+        },
+        "files": [
+            "src/helpers/helpers.php"
+        ]
+    },
+    "extra": {
+    	"laravel": {
+            "providers": [
+                "kamruljpi\\Role\\Providers\\RoleServiceProvider",
+                "kamruljpi\\Role\\Providers\\RouteServiceProvider"
+            ]
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
