@@ -15,7 +15,7 @@ return [
         'load_base_views' => false, // set true load views from base folders
         'load_base_migrations' => false, // set true load views from base folders
         
-        'package_views' => base_path('vendor/kamruljpi/role/src/views'),
+        'package_views' => base_path('vendor/kamruljpi/role/src/Resources/views'),
 
         'package_migrations' => base_path('vendor/kamruljpi/role/src/database/migrations'),
 
