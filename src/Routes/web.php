@@ -73,7 +73,7 @@ Route::group(['prefix' => 'role'], function () {
 	    'wrap_group' => 'Role',
 	    'wrap_group_level' => 'Roles',
 	]);
-	Route::delete('/distroy/{id}', [
+	Route::get('/delete/{id}', [
 	    'as' => 'role_distroy',
 	    'uses' => 'RoleController@distroy',
 	    'parent' => 'setting_parent',

@@ -44,18 +44,11 @@
             			  <td>{!! $value->name !!}</td>
             			  <td>{!! $value->is_active !!}</td>
             			  <td>
-            			  	<a href="{{route('role_create_edit',$value->id_role)}}" class="btn btn-success">{{__('edit')}}</a>
-
-                      <a href="#" class="btn btn-danger"
-                         onclick="event.preventDefault();
-                                       document.getElementById('delete-form').submit();">
+                      <a href="{{route('role_create_edit',$value->id_role)}}" class="btn btn-success">{{__('edit')}}</a>
+                      <a href="{{route('role_distroy',$value->id_role)}}" class="btn btn-danger">
                           {{ __('Delete') }}
                       </a>
-
-                      <form id="delete-form" action="{{route('role_distroy',$value->id_role)}}" method="POST" style="display: none;">
-                          @method('delete')
-                      </form>
-            			  </td>
+                    </td>
             			</tr>
             		@endforeach
             	@endif
