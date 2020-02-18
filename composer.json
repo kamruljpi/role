@@ -6,7 +6,9 @@
             "email": "kamruljpi@gmail.com"
         }
     ],
-    "require": {},
+    "require": {
+        "kamruljpi/admintemplate": "dev-master",
+    },
     "autoload": {
         "psr-4": {
             "kamruljpi\\Role\\": "src/"
