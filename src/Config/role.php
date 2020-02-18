@@ -9,7 +9,7 @@ return [
     |
     */
     
-	'admin_tmp' => 'admin.layout.app',
+	'admin_tmp' => 'admintemplate::admin.layout.app',
 	'path' => [
 
         'load_base_views' => false, // set true load views from base folders
