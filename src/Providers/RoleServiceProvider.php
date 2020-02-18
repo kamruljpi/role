@@ -4,8 +4,12 @@ namespace kamruljpi\Role\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
+
 class RoleServiceProvider extends ServiceProvider
 {
+    protected $commands = [
+        'kamruljpi\Role\Console\Commands\RouteGenerate',
+    ];
     /**
      * Bootstrap any application services.
      *
@@ -13,6 +17,7 @@ class RoleServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        
         $package_views = config("role.path.package_views");
         $package_migrations = config("role.path.package_migrations");
         $base_views = config("role.path.base_views");
@@ -43,6 +48,7 @@ class RoleServiceProvider extends ServiceProvider
             ], 'migrations');
 
         $this->loadMigrationsFrom($migrations_path);
+
     }
 
     /**
@@ -56,6 +62,7 @@ class RoleServiceProvider extends ServiceProvider
                 $this->getConfigFile(),
                 'role'
             );
+        $this->commands($this->commands);
     }
     protected function getConfigFile()
     {

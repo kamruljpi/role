@@ -18,8 +18,10 @@ class DynamicRoutes
         {
             $statement = false;
             if(isset($value->action)){
+    
                 foreach ($value->action as $valueactionk => $valueaction) {
-                    if(isset($valueaction) && !empty($valueaction) && !is_array($valueaction) && !in_array($valueactionk, $excludes)){
+
+                    if(isset($valueaction) && !empty($valueaction) && !is_array($valueaction) && !is_object($valueaction)){
                         $all_routes[$i][$valueactionk] = $valueaction;
                         $statement = true;
                     }
@@ -29,68 +31,8 @@ class DynamicRoutes
                 $i++;
             }
         }
+
         return $all_routes;
-    }
-    
-    public function folderModifyTime($dir = null)
-    {
-        if($dir == null){
-            $dir = base_path().DIRECTORY_SEPARATOR.'routes';
-        }
-        $foldermtime = 0;
-
-        $flags = \FilesystemIterator::SKIP_DOTS | \FilesystemIterator::CURRENT_AS_FILEINFO;
-        $it = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($dir, $flags));
-
-        while ($it->valid()) {
-            if (($filemtime = $it->current()->getMTime()) > $foldermtime) {
-                $foldermtime = $filemtime;
-            }
-            $it->next();
-        }
-        return $foldermtime;
-    }
-    public function createTimeFile($fileName = 'routesfolder.txt', $content = null)
-    {
-        if($content == null){
-            $content = time();
-        }
-        Storage::put($fileName, $content);
-    }
-    
-    public function isModifyFolder($dir = null, $timefile = 'routesfolder.txt')
-    {
-        if($dir == null){
-            $dir = base_path().DIRECTORY_SEPARATOR.'routes';
-        }
-        $storage_path = storage_path().DIRECTORY_SEPARATOR.'app'.DIRECTORY_SEPARATOR.'routesfolder.txt';
-        $recentModifytime = $this->folderModifyTime($dir);
-        if(!file_exists($storage_path)){
-            Storage::put($timefile, $recentModifytime);
-            return true;
-        }
-        $lastModifytime = (int)Storage::get($timefile);
-        if($lastModifytime == 0){
-            $lastModifytime = $recentModifytime;
-        }
-        if($recentModifytime > $lastModifytime){
-            return true;
-        }else if ($recentModifytime == $lastModifytime){
-            return false;
-        }else if ($recentModifytime < $lastModifytime){
-            return false;
-        }else{
-            return false;
-        }
-    }
-    
-    public function updateFolderTime($dir = null, $fileName = 'routesfolder.txt')
-    {
-        if($dir == null){
-            $dir = base_path().DIRECTORY_SEPARATOR.'routes';
-        }
-        $recentModifytime = $this->folderModifyTime($dir);
-        $this->createTimeFile($fileName,$recentModifytime);
     }
     public function getAllRoutes()
     {
@@ -99,75 +41,126 @@ class DynamicRoutes
         if(isset($all_routes) && !empty($all_routes)) {
             foreach ($all_routes as $key => $route) {
                 if(!isset($route['parent'])) {
-                    $parents[$route['as']] = $route;
-                    unset($all_routes[$key]);
+                    if(isset($route['as'])){
+                        $parents[$route['as']] = $route;
+                        unset($all_routes[$key]);
+                    }
                 }
             }
             if(isset($all_routes) && !empty($all_routes)) {
                 foreach ($all_routes as $key => $route) {
                     if(isset($route['parent']) && isset($parents[$route['parent']])) {
-                        $parents[$route['as']] = $route;
-                        unset($all_routes[$key]);
+                        if(isset($route['as'])){
+                            $parents[$route['as']] = $route;
+                            unset($all_routes[$key]);
+                        }
                     }
                 }
                 if(isset($all_routes) && !empty($all_routes)) {
                     foreach ($all_routes as $key => $route) {
                         if(isset($route['parent']) && isset($parents[$route['parent']])) {
-                            $parents[$route['as']] = $route;
-                            unset($all_routes[$key]);
+                            if(isset($route['as'])){
+                                $parents[$route['as']] = $route;
+                                unset($all_routes[$key]);
+                            }
                         }
                     }
                     if(isset($all_routes) && !empty($all_routes)) {
                         foreach ($all_routes as $key => $route) {
                             if(isset($route['parent']) && isset($parents[$route['parent']])) {
-                                $parents[$route['as']] = $route;
-                                unset($all_routes[$key]);
+                                if(isset($route['as'])){
+                                    $parents[$route['as']] = $route;
+                                    unset($all_routes[$key]);
+                                }
                             }
                         }
                         if(isset($all_routes) && !empty($all_routes)) {
                             foreach ($all_routes as $key => $route) {
                                 if(isset($route['parent']) && isset($parents[$route['parent']])) {
-                                    $parents[$route['as']] = $route;
-                                    unset($all_routes[$key]);
+                                    if(isset($route['as'])){
+                                        $parents[$route['as']] = $route;
+                                        unset($all_routes[$key]);
+                                    }
                                 }
                             }
                             if(isset($all_routes) && !empty($all_routes)) {
                                 foreach ($all_routes as $key => $route) {
                                     if(isset($route['parent']) && isset($parents[$route['parent']])) {
-                                        $parents[$route['as']] = $route;
-                                        unset($all_routes[$key]);
+                                        if(isset($route['as'])){
+                                            $parents[$route['as']] = $route;
+                                            unset($all_routes[$key]);
+                                        }
                                     }
                                 }
                                 if(isset($all_routes) && !empty($all_routes)) {
                                     foreach ($all_routes as $key => $route) {
                                         if(isset($route['parent']) && isset($parents[$route['parent']])) {
-                                            $parents[$route['as']] = $route;
-                                            unset($all_routes[$key]);
+                                            if(isset($route['as'])){
+                                                $parents[$route['as']] = $route;
+                                                unset($all_routes[$key]);
+                                            }
                                         }
                                     }
                                     if(isset($all_routes) && !empty($all_routes)) {
                                         foreach ($all_routes as $key => $route) {
                                             if(isset($route['parent']) && isset($parents[$route['parent']])) {
-                                                $parents[$route['as']] = $route;
-                                                unset($all_routes[$key]);
+                                                if(isset($route['as'])){
+                                                    $parents[$route['as']] = $route;
+                                                    unset($all_routes[$key]);
+                                                }
                                             }
                                         }
                                         if(isset($all_routes) && !empty($all_routes)) {
                                             foreach ($all_routes as $key => $route) {
                                                 if(isset($route['parent']) && isset($parents[$route['parent']])) {
-                                                    $parents[$route['as']] = $route;
-                                                    unset($all_routes[$key]);
-                                                }
-                                            }
-                                            if(isset($all_routes) && !empty($all_routes)) {
-                                                foreach ($all_routes as $key => $route) {
-                                                    if(isset($route['parent']) && isset($parents[$route['parent']])) {
+                                                    if(isset($route['as'])){
                                                         $parents[$route['as']] = $route;
                                                         unset($all_routes[$key]);
                                                     }
                                                 }
                                             }
+                                            if(isset($all_routes) && !empty($all_routes)) {
+                                                foreach ($all_routes as $key => $route) {
+                                                    if(isset($route['parent']) && isset($parents[$route['parent']])) {
+                                                        if(isset($route['as'])){
+                                                            $parents[$route['as']] = $route;
+                                                            unset($all_routes[$key]);
+                                                        }
+                                                    }
+                                                }
+                                            }
                                         }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        if(isset($all_routes) && !empty($all_routes)) {
+            foreach ($all_routes as $key => $route) {
+                if(isset($route['controller']) && !empty($route['controller'])){
+                    $rlist = @explode("@", $route['controller']);
+                    if(isset($rlist[1])){
+                        $func = $rlist[1];
+                        if(isset($rlist[0])){
+                            $rslist = explode("\\", $rlist[0]);
+                            $cntc = (count($rslist) - 1);
+                            if(isset($rslist[$cntc])){
+                                $last_controller = $rslist[$cntc];
+                                $route_name = $last_controller."_".$func;
+                                $route['as'] = $route_name;
+                                $route['name'] = $route_name;
+                                $route['description'] = "Function ".$func." of ".$last_controller." Controller";
+                                $route['is_active'] = 1;
+                                $route['is_display'] = 1;
+                                $route['wrap_group'] = $last_controller;
+                                $route['wrap_group_level'] = $last_controller;
+                                if(!isset($route['parent'])) {
+                                    if(isset($route['as'])){
+                                        $parents[$route['as']] = $route;
+                                        unset($all_routes[$key]);
                                     }
                                 }
                             }
@@ -183,7 +176,6 @@ class DynamicRoutes
         DynamicMenu::truncate();
         $routeids = $routedata = [];
         $getAllRoutes = $this->getAllRoutes();
-
         if(isset($getAllRoutes) && !empty($getAllRoutes)){
             $i = 0;
             foreach ($getAllRoutes as $key => $getRoute) {
@@ -246,16 +238,12 @@ class DynamicRoutes
                 $i++;
                 }
             }
-            $this->updateFolderTime();
         }
         return true;
     }
     public function refreshMenu()
     {
-        if($this->isModifyFolder())
-        {
-            $this->updateRoutes();
-        }
+        $this->updateRoutes();
         return true;
     }
 }

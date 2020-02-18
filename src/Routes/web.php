@@ -97,6 +97,18 @@ Route::group(['prefix' => 'role'], function () {
 	    'wrap_group' => 'Role',
 	    'wrap_group_level' => 'Roles',
 	]);
+	Route::get('/getpermission', [
+	    'as' => 'get_role_permission',
+	    'uses' => 'RolePermissionController@getpermission',
+	    'parent' => 'setting_parent',
+	    'name' => 'Get Ajax Role Permission',
+	    'icon' => '',
+	    'description' => 'Get Ajax Role Permission',
+	    'is_active' => 1,
+	    'order_id' => 0,
+	    'wrap_group' => 'Role',
+	    'wrap_group_level' => 'Roles',
+	]);
 	Route::post('/permission', [
 	    'as' => 'role_permission_store',
 	    'uses' => 'RolePermissionController@setRoutePermission',

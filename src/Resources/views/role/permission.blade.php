@@ -15,12 +15,12 @@
 		@include('role::messages.success')
  	    <form action="{{ Route('role_permission_store') }}" method="post" role="form">
  	    	@csrf
- 	    	<div class="row">
+ 	    	<div class="row" style="margin-left: 15px;">
 	 	        <div class="col-md-4">      
 		 	    	<div class="card card-primary">
 		 	    	    <div class="card-body">
 	 	                  	<div class="form-group">
-	 	                      	<select class="form-control input_required role_id" name="role_id" onchange="" >
+	 	                      	<select data-event="change" data-url="{{ Route('get_role_permission') }}" data-type="GET" data-datatype="json" data-datavalue="self" data-callback="setRolePermission"  class="form-control input_required role_id" name="role_id" onchange="" >
 	 	                          	<option value="">{{__('-- Select Role --')}}</option>
 	 	                          	@if(isset($roles) && count($roles) > 0)
 		 	                          	@foreach($roles as $role) 
@@ -33,10 +33,10 @@
 		 	        </div>
 		 	    </div>
 	 	    </div>
-          	<div class="all_checkbox" id="all_checkbox">
-          		<div class="row" >
+          	<div class="all_checkbox" id="all_checkbox" style="margin-left: 15px !important;margin-right: 15px !important;">
+          		<div class="row" id="route_name_wrap">
                  	@foreach($routes as $route)
-                   		<div id="{{ $route['wrap_group'] }}" class="route_name_select_group {{ $route['wrap_group'] }} col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                   		<article id="{{ $route['wrap_group'] }}" class="route_name_select_group {{ $route['wrap_group'] }} col-xs-4 col-sm-4 col-md-4 col-lg-4">
 	                       	<div class="card card-primary">
 	                       		<div class="card-header">
 	                       			<div class="float-left">
@@ -59,15 +59,57 @@
 	                               	</ul>
 	                           </div>
 	                       </div>
-                   		</div>
+                   		</article>
                  	@endforeach
                  </div>
           	</div>
           	<div class="form-group">
-              	<button class="btn btn-primary btn-outline" type="submit" >{{ __('Set Permission') }}</button>
+              	<button class="btn btn-primary btn-outline" type="submit" style="float: right;margin-right: 15px;">{{ __('Set Permission') }}</button>
           	</div>
  	    </form>
 	</div>
+	<style>
+		.container-fluid{
+			background-color: #fff;
+		    padding-top: 30px;
+		    padding-bottom: 45px;
+		    margin-left: 10px;
+		    margin-right: 10px;
+		}
+	</style>
+@endsection
+@section('prescript')
+	<script src="{{ asset('media/js/macy.js') }}"></script>
+	<script>
+		function setRolePermission(results){
+			$(".route_checkbox").attr('checked', false);
+			if(! typeof results == 'undefined'){
+				alert("something Went Wrong.");
+	      	}else{
+	      		$(".route_checkbox").each(function(index){
+	      			$(".route_checkbox").attr('checked', false);
+	      			$(this).prop('checked', false);
+	      			if($.inArray($(this).val(), JSON.parse(results)) != -1){
+	      				$(this).prop('checked', true);
+	      			}
+	      		});
+	      	}
+		}
+	$(document).ready(function(){
+		var macyInstance = Macy({
+		  container: '#route_name_wrap',
+		  columns: 3,
+		  margin: 0,
+		  trueOrder: false,
+		});
+		macyInstance.recalculate();
+		macyInstance.runOnImageLoad(function () {
+		  macyInstance.recalculate(true);
+		}, true);
+		macyInstance.remove();
+		macyInstance.reInit();
+	});
+	</script>
 @endsection
 @section('script')
 	<script>

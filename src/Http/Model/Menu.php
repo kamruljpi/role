@@ -35,7 +35,9 @@ class Menu extends Model
 
     		}
     	}
-
+        // print '<pre>';
+        // print_r($routes);
+        // die();
     	return $routes;
     }
 }
