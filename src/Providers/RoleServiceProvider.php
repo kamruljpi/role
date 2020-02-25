@@ -17,7 +17,6 @@ class RoleServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        
         $package_views = config("role.path.package_views");
         $package_migrations = config("role.path.package_migrations");
         $base_views = config("role.path.base_views");

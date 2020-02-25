@@ -4,12 +4,15 @@ return [
 
 	/*
     |--------------------------------------------------------------------------
-    | Admin Template 
+    | Role
     |--------------------------------------------------------------------------
     |
     */
     
 	'admin_tmp' => 'admintemplate::admin.layout.app',
+
+    'menus' => (function_exists('generateMenu')) ? generateMenu() : [],
+
 	'path' => [
 
         'load_base_views' => false, // set true load views from base folders

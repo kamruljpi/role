@@ -11,7 +11,7 @@ Route::get('setting_parent', array(
     'wrap_group_level' => 'Settings'
 ));
 
-Route::group(['prefix' => 'role'], function () {
+Route::group(['prefix' => 'role','middleware' => ['auth']], function () {
 	Route::get('/', [
 	    'as' => 'role_index',
 	    'uses' => 'RoleController@index',
@@ -50,7 +50,7 @@ Route::group(['prefix' => 'role'], function () {
 	    'wrap_group_level' => 'Roles',
 	]);
 	Route::get('/edit/{id}', [
-	    'as' => 'role_create_edit',
+	    'as' => 'role_edit',
 	    'uses' => 'RoleController@edit',
 	    'parent' => 'setting_parent',
 	    'name' => 'Role Edit',
@@ -74,12 +74,24 @@ Route::group(['prefix' => 'role'], function () {
 	    'wrap_group_level' => 'Roles',
 	]);
 	Route::get('/delete/{id}', [
-	    'as' => 'role_distroy',
-	    'uses' => 'RoleController@distroy',
+	    'as' => 'role_delete',
+	    'uses' => 'RoleController@delete',
 	    'parent' => 'setting_parent',
 	    'name' => 'Role Delete',
 	    'icon' => '',
 	    'description' => 'Role Delete',
+	    'is_active' => 1,
+	    'order_id' => 0,
+	    'wrap_group' => 'Role',
+	    'wrap_group_level' => 'Roles',
+	]);
+	Route::get('/status/{id}', [
+	    'as' => 'role_status',
+	    'uses' => 'RoleController@Status',
+	    'parent' => 'setting_parent',
+	    'name' => 'Role Status',
+	    'icon' => '',
+	    'description' => 'Role Status',
 	    'is_active' => 1,
 	    'order_id' => 0,
 	    'wrap_group' => 'Role',
