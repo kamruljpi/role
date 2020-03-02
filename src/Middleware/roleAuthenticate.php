@@ -39,12 +39,12 @@ class RoleAuthenticate
      */
     public function handle($request, Closure $next, ...$guards)
     {
-        // $userRoleId = $this->auth->user()->user_role_id;
-        // $currentRouteName = $request->route()->getName();
-        print '<pre>';
-        var_dump($this->auth->user());
-        print '</pre>';
-        die();
+        $userRoleId = $this->auth->user()->user_role_id;
+        $currentRouteName = $request->route()->getName();
+        // print '<pre>';
+        // var_dump($this->auth->user());
+        // print '</pre>';
+        // die();
         if(DynamicRoutes::checkAccess($userRoleId, $currentRouteName)){
             return $next($request);
         }else{
