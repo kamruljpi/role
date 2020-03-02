@@ -48,6 +48,7 @@ class RoleServiceProvider extends ServiceProvider
 
         $this->loadMigrationsFrom($migrations_path);
 
+        $this->app['router']->aliasMiddleware('RoleAuthenticate', \kamruljpi\Role\Middleware\RoleAuthenticate::class);
     }
 
     /**

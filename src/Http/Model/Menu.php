@@ -8,7 +8,7 @@ class Menu extends Model
 {
     protected $primaryKey = "id_menu";
 
-    protected $fillable = ['is_display', 'parent_id','is_active','order_id','name','route_name','description','wrap_group','wrap_group_level','icon'];
+    protected $fillable = ['is_display', 'parent_id','is_active','order_id','name','uri','route_name','description','wrap_group','wrap_group_level','icon'];
 
     public function scopeActive($query) {
     	$query->where('is_active',1);
@@ -22,7 +22,7 @@ class Menu extends Model
 
     public static function getRoutes() {
     	$routes = [];
-    	foreach (static::list() as $key => $value) {
+    	foreach (static::all() as $key => $value) {
     		if($value->wrap_group) {
     			if(!isset($routes[$value->wrap_group])) {
     				$routes[$value->wrap_group] = ['routes' => [$value->toArray()]];

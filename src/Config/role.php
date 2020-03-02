@@ -11,7 +11,7 @@ return [
     
 	'admin_tmp' => 'admintemplate::admin.layout.app',
 
-    'menus' => (function_exists('generateMenu')) ? generateMenu() : [],
+    // 'menus' => (function_exists('generateMenu')) ? generateMenu() : [],
 
 	'path' => [
 

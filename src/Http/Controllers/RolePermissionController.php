@@ -8,12 +8,13 @@ use kamruljpi\Role\Http\Model\Role;
 use Illuminate\Http\Request;
 use kamruljpi\Role\Http\Model\UserRoleMenu;
 use Validator;
+use kamruljpi\Role\Http\Controllers\DynamicRoutes;
 
 class RolePermissionController extends BaseController
 {
 	public function index() {
 		return view('role::role.permission', [
-			'roles' => Role::list(),
+			'roles' => Role::all(),
 			'routes' => Menu::getRoutes(),
 		]);
 	}
@@ -69,6 +70,7 @@ class RolePermissionController extends BaseController
 		        $setPermission->save();
 		    }
 		}
+		DynamicRoutes::roleWiseValidRoutes($request->role_id, true);
 		return redirect()->route('role_permission')->withSuccess("Successfuly Assigned Role Permission.");
 	}
 }

@@ -20,6 +20,7 @@ class CreateMenu extends Migration
             $table->tinyInteger('is_active')->default(0);
             $table->integer('order_id')->default(0);
             $table->string('name');
+            $table->string('uri');
             $table->string('route_name');
             $table->string('description')->nullable();
             $table->string('wrap_group')->nullable();

@@ -11,13 +11,13 @@ class RoleController extends ProjectBaseController
 {
 	public function __construct() {
 		$this->modelName = 'kamruljpi\Role\Http\Model\Role';
-		// $this->extraBtns = array(
-		// 	array(
-		// 		'routeName' => 'role_permission',
-		// 		'title' => 'Role Permission',
-		// 		'class' => 'role_permission_cls',
-		// 	)
-		// );
+		$this->extraBtns = array(
+			array(
+				'routeName' => 'role_permission',
+				'title' => 'Role Permission',
+				'class' => 'role_permission_cls',
+			)
+		);
 		// $this->btnLists = array(
 		// 	array(
 		// 		'routeName' => 'role_permission',
@@ -52,7 +52,7 @@ class RoleController extends ProjectBaseController
 	}
 	// public function index() {
 	// 	return view("role::role.index", [
-	// 		'details' => Role::list(),
+	// 		'details' => Role::all(),
 	// 	]);
 	// }
 	public function create() {

@@ -9,7 +9,9 @@ use DB;
 class UserRoleMenu extends Model
 {
     protected $table = "user_role_menus";
+
     protected $primaryKey = "id_user_role_menu";
+
     public static function generateMenu(){
         $menus_array = array();
         if(isset(Auth::user()->user_role_id)){
@@ -23,6 +25,7 @@ class UserRoleMenu extends Model
                     $all_route_array[$im]['route_name'] = $value->route_name;
                     if($value->is_display == 1){
                         $menus_array[$i]['name'] = $value->name;
+                        $menus_array[$i]['icon'] = $value->icon;
                         $menus_array[$i]['route_name'] = $value->route_name;
                         $menus_array[$i]['order_id'] = $value->order_id;
                         $menus_array[$i]['menu_id'] = $value->id_menu;
@@ -33,6 +36,7 @@ class UserRoleMenu extends Model
                             foreach ($child_menu as $cm) {
                                 if($cm->is_display == 1){
                                     $menus_array[$i]['subMenu'][$j]['name'] = $cm->name;
+                                    $menus_array[$i]['subMenu'][$j]['icon'] = $cm->icon;
                                     $menus_array[$i]['subMenu'][$j]['route_name'] = $cm->route_name;
                                     $menus_array[$i]['subMenu'][$j]['order_id'] = $cm->order_id;
                                     $menus_array[$i]['subMenu'][$j]['menu_id'] = $cm->id_menu;

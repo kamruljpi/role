@@ -1,5 +1,9 @@
 <?php
 
+Route::get('permission_denied', function(){
+	return "You dont have permission to access this page. Please contact with system admin";
+});
+
 Route::get('setting_parent', array(
     'as' => 'setting_parent',
     'name' => 'Setting Parent',
@@ -11,7 +15,7 @@ Route::get('setting_parent', array(
     'wrap_group_level' => 'Settings'
 ));
 
-Route::group(['prefix' => 'role','middleware' => ['auth']], function () {
+Route::group(['prefix' => 'role','middleware' => ['RoleAuthenticate']], function () {
 	Route::get('/', [
 	    'as' => 'role_index',
 	    'uses' => 'RoleController@index',
