@@ -334,6 +334,21 @@ class DynamicRoutes
             return false;
         }
     }
+    public static function getRouteNameByUri($uri = null)
+    {
+        if($uri == null){
+            return false;
+        }
+        $data = DynamicMenu::where([
+            'is_active' => 1,
+            'uri' => $uri
+        ])->select('route_name')->first();
+        if(isset($data->route_name)){
+            return $data->route_name;
+        }else{
+            return false;
+        }
+    } 
     public function refreshMenu()
     {
         $this->updateRoutes();

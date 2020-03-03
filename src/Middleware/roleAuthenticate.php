@@ -6,6 +6,7 @@ use Closure;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Contracts\Auth\Factory as Auth;
 use kamruljpi\Role\Http\Controllers\DynamicRoutes;
+use Illuminate\Support\Facades\Route;
 
 class RoleAuthenticate
 {
@@ -41,10 +42,13 @@ class RoleAuthenticate
     {
         $userRoleId = $this->auth->user()->user_role_id;
         $currentRouteName = $request->route()->getName();
-        // print '<pre>';
-        // var_dump($this->auth->user());
-        // print '</pre>';
-        // die();
+        if(empty($currentRouteName)){
+            $currentPath= Route::getFacadeRoot()->current()->uri();
+            $currentRouteName = DynamicRoutes::getRouteNameByUri($currentPath);
+        }
+        if(empty($currentRouteName)){
+            return redirect('permission_denied');
+        }
         if(DynamicRoutes::checkAccess($userRoleId, $currentRouteName)){
             return $next($request);
         }else{

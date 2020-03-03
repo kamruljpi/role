@@ -81,10 +81,7 @@ class RoleController extends ProjectBaseController
 		$role->update();
 		return redirect()->route('role_index')->withSuccess("Successfuly updated new Role.");
 	}
-	public function show($id) {}
-	// public function distroy($id) {
-	// 	$role = Role::findById($id);
-	// 	$role->delete();
-	// 	return redirect()->route('role_index')->withSuccess("Successfuly Deleted Role.");
-	// }
+	public function show($id) {
+
+	}
 }
