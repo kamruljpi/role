@@ -42,8 +42,8 @@ Route::group(['prefix' => 'role','middleware' => ['RoleAuthenticate']], function
 	    'wrap_group_level' => 'Roles',
 	]);
 	Route::post('/create', [
-	    'as' => 'role_create_store',
-	    'uses' => 'RoleController@store',
+	    'as' => 'role_create_action',
+	    'uses' => 'RoleController@createAction',
 	    'parent' => 'setting_parent',
 	    'name' => 'Role Store',
 	    'icon' => '',
@@ -66,8 +66,8 @@ Route::group(['prefix' => 'role','middleware' => ['RoleAuthenticate']], function
 	    'wrap_group_level' => 'Roles',
 	]);
 	Route::post('/edit/{id}', [
-	    'as' => 'role_create_update',
-	    'uses' => 'RoleController@update',
+	    'as' => 'role_edit_action',
+	    'uses' => 'RoleController@editAction',
 	    'parent' => 'setting_parent',
 	    'name' => 'Role Update',
 	    'icon' => '',

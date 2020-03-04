@@ -307,11 +307,11 @@ class DynamicRoutes
             return false;
         }
         $force = true;
-        $getValidRouteByRole = Session::get('getValidRouteByRole');
+        $getValidRouteByRole = Session::get('getValidRouteByRole_'.$userRoleId);
         if(empty($getValidRouteByRole) || ($force == true)){
-            Session::put('getValidRouteByRole', self::getValidRouteByRoleId($userRoleId));
+            Session::put('getValidRouteByRole_'.$userRoleId, self::getValidRouteByRoleId($userRoleId));
         }
-        return Session::get('getValidRouteByRole');
+        return Session::get('getValidRouteByRole_'.$userRoleId);
         
     }
     public static function checkAccess($userRoleId = null, $current_route = null)
@@ -348,7 +348,7 @@ class DynamicRoutes
         }else{
             return false;
         }
-    } 
+    }
     public function refreshMenu()
     {
         $this->updateRoutes();
