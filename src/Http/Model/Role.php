@@ -19,7 +19,15 @@ class Role extends Model
 	// 	return static::orderBy('updated_at', 'desc')->paginate($paginate);
 	// }
 	
-	// public static function findById($id) {
-	// 	return static::find($id);
-	// }
+	public static function getRoleNameById($role_id = null) 
+	{
+		if($role_id == null){
+			return false;
+		}
+		if(isset(static::find($role_id)->name)){
+			return strtolower(static::find($role_id)->name);
+		}else{
+			return false;
+		}
+	}
 }

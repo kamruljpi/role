@@ -19,4 +19,7 @@ class RoleController extends ProjectBaseController
 			)
 		);
 	}
+	public function getValidation($table = null) {
+        return ['name' => 'required|unique:'.$table];
+    }
 }

@@ -7,6 +7,8 @@ use Illuminate\Auth\AuthenticationException;
 use Illuminate\Contracts\Auth\Factory as Auth;
 use kamruljpi\Role\Http\Controllers\DynamicRoutes;
 use Illuminate\Support\Facades\Route;
+use kamruljpi\Role\Http\Model\Role;
+
 
 class RoleAuthenticate
 {
@@ -42,17 +44,22 @@ class RoleAuthenticate
     {
         $userRoleId = $this->auth->user()->user_role_id;
         $currentRouteName = $request->route()->getName();
-        if(empty($currentRouteName)){
-            $currentPath= Route::getFacadeRoot()->current()->uri();
-            $currentRouteName = DynamicRoutes::getRouteNameByUri($currentPath);
-        }
-        if(empty($currentRouteName)){
-            return redirect('permission_denied');
-        }
-        if(DynamicRoutes::checkAccess($userRoleId, $currentRouteName)){
+        $roleName = Role::getRoleNameById($userRoleId);
+        if($roleName == 'superadmin'){
             return $next($request);
         }else{
-            return redirect('permission_denied');
+            if(empty($currentRouteName)){
+                $currentPath= Route::getFacadeRoot()->current()->uri();
+                $currentRouteName = DynamicRoutes::getRouteNameByUri($currentPath);
+            }
+            if(empty($currentRouteName)){
+                return redirect('permission_denied');
+            }
+            if(DynamicRoutes::checkAccess($userRoleId, $currentRouteName)){
+                return $next($request);
+            }else{
+                return redirect('permission_denied');
+            }
         }
     }
 }
