@@ -7,7 +7,7 @@
         }
     ],
     "require": {
-        "kamruljpi/admintemplate": "dev-master",
+        "kamruljpi/admintemplate": "dev-master"
     },
     "autoload": {
         "psr-4": {
