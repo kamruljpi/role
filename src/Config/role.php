@@ -18,7 +18,7 @@ return [
         
         'package_views' => base_path('vendor/kamruljpi/role/src/Resources/views'),
 
-        'package_migrations' => base_path('vendor/kamruljpi/role/src/database/migrations'),
+        'package_migrations' => base_path('vendor/kamruljpi/role/src/Database/Migrations'),
 
         'package_assets' => base_path('vendor/kamruljpi/role/src/assets'),
 
