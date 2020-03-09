@@ -66,6 +66,6 @@ class RoleServiceProvider extends ServiceProvider
     }
     protected function getConfigFile()
     {
-        return __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'role.php';
+        return __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'Config' . DIRECTORY_SEPARATOR . 'role.php';
     }
 }
