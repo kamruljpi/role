@@ -17,6 +17,7 @@ class CreateRole extends Migration
             $table->increments('id_role');
             $table->string('name')->nullable();
             $table->integer('is_active')->default(1);
+            $table->softDeletes();
             $table->timestamps();
         });
     }
